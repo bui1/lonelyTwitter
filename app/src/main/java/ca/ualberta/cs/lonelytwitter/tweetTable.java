@@ -10,5 +10,7 @@ public interface tweetTable {
     public String getMessage();
 
     public Date getDate();
+    
+    public Mood getMood();
 
 }
