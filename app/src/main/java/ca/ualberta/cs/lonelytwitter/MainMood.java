@@ -32,8 +32,10 @@ public abstract class MainMood(){
     }
 
     public Date getDate() { return date;}
-
-
+	
+	public Date setDate(Date date) {
+		this.date = date;
+	}
 
     public abstract Boolean isImportant();
 	
