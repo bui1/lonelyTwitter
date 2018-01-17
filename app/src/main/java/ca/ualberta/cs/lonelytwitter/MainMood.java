@@ -23,9 +23,6 @@ public abstract class MainMood(){
 		else if (mood == "sad"){
 			this.mood = "sad";
 		}
-		else if (mood == "mad"){
-			this.mood = "mad";
-		}
         else{
             throw new MoodException();
         }
@@ -37,7 +34,7 @@ public abstract class MainMood(){
 		this.date = date;
 	}
 
-    public abstract Boolean isImportant();
+    public abstract Boolean isFeelingGood();
 	
 	
 }
