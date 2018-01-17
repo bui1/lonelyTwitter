@@ -12,11 +12,13 @@ import java.util.Date;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class LonelyTwitterActivity extends Activity {
 
@@ -34,6 +36,8 @@ public class LonelyTwitterActivity extends Activity {
 		Button saveButton = (Button) findViewById(R.id.save);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
+
+
 		saveButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
@@ -48,12 +52,53 @@ public class LonelyTwitterActivity extends Activity {
 
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated avdmethod stub
 		super.onStart();
 		String[] tweets = loadFromFile();
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				R.layout.list_item, tweets);
 		oldTweetsList.setAdapter(adapter);
+
+		NormalTweet normalTweet = new NormalTweet("");
+		try {
+			normalTweet.setMessage("hello wo1111111111111111111111rld");
+		}
+		catch (Tweettoolongexception e){
+			Log.e("asdasd","Errror ---- message too long");
+
+		}
+
+		ImportantTweet importanttweet1 = new ImportantTweet("Hello world, hella important");
+		ImportantTweet importantTweet2 = new ImportantTweet("number 2 important");
+
+		NormalTweet normal1 = new NormalTweet("this is normal tweet 1");
+		NormalTweet normal2 = new NormalTweet("this is not important either");
+
+		ArrayList <Tweet> tweetList = new ArrayList<Tweet>();
+		tweetList.add(normalTweet);
+		tweetList.add(normal1);
+		tweetList.add(normal2);
+		tweetList.add(importanttweet1);
+		tweetList.add(importantTweet2);
+
+		for (Tweet t: tweetList){
+			Log.d("Tweettag",t.isImportant().toString());
+		}
+
+		ArrayList<tweetTable> tweettablelist = new ArrayList<tweetTable>();
+		tweettablelist.add(normalTweet);
+		tweettablelist.add(normal1);
+		tweettablelist.add(normal2);
+		tweettablelist.add(importanttweet1);
+		tweettablelist.add(importantTweet2);
+
+		String onscreen = "";
+
+		for (tweetTable t: tweettablelist){
+			onscreen += t.getMessage() + "\n";
+
+		}
+		Toast.makeText(this, onscreen, Toast.LENGTH_SHORT).show();
 	}
 
 	private String[] loadFromFile() {
