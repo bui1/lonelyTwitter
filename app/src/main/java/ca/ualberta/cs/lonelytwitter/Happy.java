@@ -16,7 +16,7 @@ public class Happy extends MainMood {
     }
 
     @Override
-    public Boolean isHappy(){
+    public Boolean isFeelingGood(){
         return Boolean.TRUE;
     }
 }
