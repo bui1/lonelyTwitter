@@ -46,6 +46,17 @@ public class LonelyTwitterActivity extends Activity {
 		Button saveButton = (Button) findViewById(R.id.save);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
+		Button clearButton = (Button)findViewById(R.id.clear);
+
+
+		clearButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				setResult(RESULT_OK);
+				clearFile();
+				adapter.notifyDataSetChanged();
+			}
+		});
+
 
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
@@ -60,11 +71,6 @@ public class LonelyTwitterActivity extends Activity {
 				saveInFile();//text, new Date(System.currentTimeMillis()));
 
 				adapter.notifyDataSetChanged(); // let adapter know we added a new file, to update the UI
-
-
-
-
-
 
 			}
 		});
@@ -181,6 +187,28 @@ public class LonelyTwitterActivity extends Activity {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
+
+	private void clearFile() {
+		try {
+
+
+			FileOutputStream fos = openFileOutput(FILENAME,
+					Context.MODE_PRIVATE); //overwrites the file, not append to the end
+			//MODE_APPEND
+
+			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+			tweetList.clear();
+
+			Gson gson = new Gson();
+			gson.toJson(tweetList,out); // write tweetlist to the output file by converting it to JSON
+			out.flush();
+
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException();
+		} catch (IOException e) {
 			throw new RuntimeException();
 		}
 	}

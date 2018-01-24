@@ -11,6 +11,6 @@ public interface tweetTable {
 
     public Date getDate();
     
-    public Mood getMood();
+    //public Mood getMood();
 
 }
