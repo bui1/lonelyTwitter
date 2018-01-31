@@ -1,3 +1,14 @@
+/* Lonely Twitter Activity
+ *
+ * Version Number 1.0
+ *
+ * January 30th 2018
+ *
+ * Copyright @ 2018 Team X. CMPUT 301 University of Alberta. All rights reserved.
+ * You may use, distribute, or modify this code under terms and conditions of the Code of Student Behaviour at University of Alberta. Contact abc.ualberta.ca for more info.
+ */
+
+
 package ca.ualberta.cs.lonelytwitter;
 
 import java.io.BufferedReader;
@@ -27,6 +38,18 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Represents the main Lonely Twitter activity
+ *
+ * @author bui1
+ * @version 1.0
+ * @see Tweet
+ * @see ImportantTweet
+ * @see NormalTweet
+ *
+ *
+ */
+
 public class LonelyTwitterActivity extends Activity {
 
 	private static final String FILENAME = "tweets.sav";
@@ -35,7 +58,8 @@ public class LonelyTwitterActivity extends Activity {
 
 	private ArrayList<Tweet> tweetList;
 	private ArrayAdapter<Tweet> adapter;
-	
+
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -129,6 +153,9 @@ public class LonelyTwitterActivity extends Activity {
 //		Toast.makeText(this, onscreen, Toast.LENGTH_SHORT).show();
 	}
 
+	/**
+	 * Loads saved tweets from file to the adapter
+	 */
 	private void loadFromFile() {
 		//ArrayList<String> tweets = new ArrayList<String>();
 		try {
@@ -163,7 +190,10 @@ public class LonelyTwitterActivity extends Activity {
 		}
 		//return tweets.toArray(new String[tweets.size()]);
 	}
-	
+
+	/**
+	 * Saves new tweets to file
+	 */
 	private void saveInFile() {
 		try {
 
@@ -191,6 +221,9 @@ public class LonelyTwitterActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Clears all the tweets from file
+	 */
 	private void clearFile() {
 		try {
 
