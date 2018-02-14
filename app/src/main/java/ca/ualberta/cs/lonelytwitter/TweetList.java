@@ -26,4 +26,12 @@ public class TweetList {
         tweets.remove(tweet);
     }
 
+    public int getLength(){
+        int sum = 0;
+        for (Tweet x:tweets){
+            sum = sum + 1;
+        }
+        return sum;
+    }
+
 }
