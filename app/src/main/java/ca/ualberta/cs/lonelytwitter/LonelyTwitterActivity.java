@@ -25,10 +25,12 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +54,8 @@ import com.google.gson.reflect.TypeToken;
 
 public class LonelyTwitterActivity extends Activity {
 
+	private Activity activity = LonelyTwitterActivity.this;
+
 	private static final String FILENAME = "tweets.sav";
 	private EditText bodyText;
 	private ListView oldTweetsList;
@@ -59,6 +63,10 @@ public class LonelyTwitterActivity extends Activity {
 	private ArrayList<Tweet> tweetList;
 	private ArrayAdapter<Tweet> adapter;
 
+
+	public ListView getOldTweetsList(){
+		return oldTweetsList;
+	}
 
 	/** Called when the activity is first created. */
 	@Override
@@ -70,17 +78,19 @@ public class LonelyTwitterActivity extends Activity {
 		Button saveButton = (Button) findViewById(R.id.save);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
-		Button clearButton = (Button)findViewById(R.id.clear);
+		Button Clear = (Button) findViewById(R.id.clear);
 
 
-		clearButton.setOnClickListener(new View.OnClickListener() {
+		Clear.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				setResult(RESULT_OK);
+				tweetList.clear();
 				clearFile();
+				deleteFile("tweets.sav");
 				adapter.notifyDataSetChanged();
+
 			}
 		});
-
 
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +108,15 @@ public class LonelyTwitterActivity extends Activity {
 
 			}
 		});
+
+
+		oldTweetsList.setOnClickListener(new AdapterView.OnItemClickListener() {
+			public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+				Intent intent = new Intent(activity, EditTweetActivity.class);
+				startActivity(intent);
+			}
+		});
+
 	}
 
 	@Override
